@@ -394,7 +394,9 @@ impl Window {
 
     #[inline]
     pub fn set_blur(&self, blur: bool) {
-        self.window_state.lock().unwrap().set_blur(blur);
+        if self.window_state.lock().unwrap().set_blur(blur) {
+            self.request_redraw();
+        }
     }
 
     #[inline]
